@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truco</title>
+    <style>
+        /* Estilo Moderno com Cores Vibrantes */
+        :root {
+            --vermelho: #E74C3C;
+            --vermelho-escuro: #C0392B;
+            --azul: #3498DB;
+            --azul-escuro: #2980B9;
+            --verde: #2ECC71;
+            --verde-escuro: #27AE60;
+            --amarelo: #F1C40F;
+            --amarelo-escuro: #F39C12;
+            --preto: #2C3E50;
+            --branco: #ECF0F1;
+            --cinza: #95A5A6;
+            --base-font-size: 18px;
+            
+            /* Cores padrão (modo claro) */
+            --bg-color: var(--branco);
+            --text-color: var(--preto);
+            --header-bg: var(--vermelho);
+            --header-text: var(--branco);
+            --card-bg: var(--branco);
+            --card-border: var(--cinza);
+            --nav-bg: var(--branco);
+            --nav-text: var(--vermelho);
+            --footer-bg: var(--vermelho);
+            --footer-text: var(--branco);
+            --border-color: var(--vermelho);
+            --destaque-color: var(--amarelo);
+        }
+        
+        /* Modo Escuro */
+        [data-theme="dark"] {
+            --bg-color: var(--preto);
+            --text-color: var(--branco);
+            --header-bg: var(--vermelho-escuro);
+            --header-text: var(--branco);
+            --card-bg: #34495E;
+            --card-border: var(--cinza);
+            --nav-bg: var(--preto);
+            --nav-text: var(--branco);
+            --footer-bg: var(--vermelho-escuro);
+            --footer-text: var(--branco);
+            --border-color: var(--amarelo);
+            --destaque-color: var(--amarelo);
+        }
+        
+        body {
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            font-size: var(--base-font-size);
+            transition: all 0.3s ease;
+        }
+        
+        /* Cabeçalho Vibrante */
+        header {
+            background: linear-gradient(135deg, var(--header-bg), var(--vermelho-escuro));
+            color: var(--header-text);
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 5px solid var(--destaque-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .game-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+        }
+        
+        .game-title {
+            font-size: 3.5rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .game-motto {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--destaque-color);
+            opacity: 0.9;
+        }
+        
+        /* Barra de Acessibilidade Moderna */
+        .accessibility-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.7);
+            padding: 8px;
+            border-radius: 20px;
+        }
+        
+        .accessibility-btn {
+            background: var(--destaque-color);
+            color: var(--preto);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .accessibility-btn:hover {
+            background: var(--amarelo-escuro);
+            transform: scale(1.1);
+        }
+        
+        /* Navegação Moderna */
+        nav {
+            background-color: var(--nav-bg);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--destaque-color);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover,
+        .nav-link:focus {
+            background: var(--destaque-color);
+            color: var(--preto);
+        }
+        
+        .nav-link[aria-current="page"] {
+            background: var(--vermelho);
+            color: var(--branco);
+        }
+        
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--vermelho);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--destaque-color);
+        }
+        
+        /* Grid de Conteúdo */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: var(--destaque-color);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--vermelho);
+            font-weight: 600;
+            border-bottom: 2px solid var(--destaque-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        /* Galeria de Imagens */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s, filter 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(231, 76, 60, 0.9);
+            color: var(--branco);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Linha do Tempo */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--destaque-color);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            padding: 1.5rem 2rem;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border: 2px solid var(--destaque-color);
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-year {
+            font-weight: 700;
+            color: var(--vermelho);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Tabela de Regras */
+        .rules-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .rules-table th {
+            background: var(--vermelho);
+            color: var(--branco);
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .rules-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .rules-table tr:nth-child(even) {
+            background: rgba(231, 76, 60, 0.1);
+        }
+        
+        .rules-table tr:hover {
+            background: rgba(231, 76, 60, 0.2);
+        }
+        
+        /* Rodapé Elegante */
+        footer {
+            background: linear-gradient(135deg, var(--footer-bg), var(--vermelho-escuro));
+            color: var(--footer-text);
+            padding: 4rem 1rem;
+            text-align: center;
+            border-top: 5px solid var(--destaque-color);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            width: 100px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.3));
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--branco);
+            background: var(--destaque-color);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top:hover {
+            background: var(--amarelo-escuro);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .back-to-top::after {
+            content: '↑';
+            margin-left: 5px;
+        }
+        
+        /* Elementos de Acessibilidade */
+        .skip-link {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            background: var(--vermelho);
+            color: var(--branco);
+            padding: 1rem;
+            z-index: 1000;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        
+        .skip-link:focus {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            width: auto;
+            height: auto;
+            clip: auto;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 2.5rem;
+            }
+            
+            .game-motto {
+                font-size: 1.2rem;
+            }
+            
+            .accessibility-bar {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content::after,
+            .timeline-item:nth-child(odd) .timeline-content::after {
+                left: -10px;
+                right: auto;
+                border-right: 10px solid white;
+                border-left: none;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Link para pular navegação -->
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo principal</a>
+    
+    <!-- Cabeçalho Vibrante -->
+    <header>
+        <div class="header-content">
+            <h1 class="game-title">Truco Brasileiro</h1>
+        </div>
+    </header>
+    
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-bar">
+        <button id="increaseFont" class="accessibility-btn" aria-label="Aumentar tamanho do texto">A+</button>
+        <button id="decreaseFont" class="accessibility-btn" aria-label="Diminuir tamanho do texto">A-</button>
+        <button id="toggleTheme" class="accessibility-btn" aria-label="Alternar modo escuro">🌓</button>
+    </div>
+    
+    <!-- Navegação Moderna -->
+    <nav aria-label="Navegação principal">
+        <div class="nav-container">
+            <a href="#historia" class="nav-link" accesskey="1">História</a>
+            <a href="#regras" class="nav-link" accesskey="2">Regras</a>
+            <a href="#variantes" class="nav-link" accesskey="3">Variantes</a>
+            <a href="#cartas" class="nav-link" accesskey="4">Cartas</a>
+            <a href="#dicas" class="nav-link" accesskey="5">Dicas</a>
+        </div>
+    </nav>
+    
+    <!-- Conteúdo Principal -->
+    <main id="conteudo">
+        <section id="historia" aria-labelledby="historia-heading">
+            <h2 id="historia-heading">História do Truco</h2>
+            <p>O Truco é um jogo de cartas tradicional no Brasil, especialmente popular nas regiões Sul, Sudeste e Centro-Oeste. Com raízes que remontam à Espanha e Itália, o jogo foi adaptado e ganhou características únicas no Brasil.</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Origem Europeia</h3>
+                    <p>O Truco descende de jogos como o Truco Espanhol e o Tressette Italiano, trazidos ao Brasil por imigrantes no século XIX. A versão brasileira incorporou elementos de vários jogos europeus.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Popularização no Brasil</h3>
+                    <p>No Brasil, o Truco se popularizou como um jogo de tabernas e encontros sociais, especialmente entre trabalhadores rurais e urbanos. Tornou-se parte da cultura popular brasileira.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Variantes Regionais</h3>
+                    <p>Cada região do Brasil desenvolveu suas próprias variações do jogo. O Truco Mineiro, o Paulista e o Gaúcho são as versões mais conhecidas, com regras e vocabulários distintos.</p>
+                </div>
+            </div>
+        
+        <section id="regras" aria-labelledby="regras-heading">
+            <h2 id="regras-heading">Regras Básicas</h2>
+            <p>O Truco é jogado com um baralho espanhol (40 cartas) e pode ser jogado por 2, 4 ou 6 jogadores. Aqui estão as regras básicas da versão mais comum:</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Objetivo</h3>
+                    <p>Fazer mais pontos que o time adversário, ganhando rodadas (mãos) através de combinações de cartas ou blefes. O primeiro time a marcar 12 pontos vence a partida.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Valor das Cartas</h3>
+                    <p>As cartas têm uma ordem de força específica no Truco. As mais fortes são o 3, 2 e Ás e assim por diante.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Manilhas</h3>
+                    <p>As quatro cartas mais fortes são as "manilhas", determinadas pela carta virada no início da partida. Elas superam todas as outras cartas do jogo.</p>
+                </div>
+            </div>
+            
+            <table class="rules-table">
+                <thead>
+                    <tr>
+                        <th>Ação</th>
+                        <th>Descrição</th>
+                        <th>Pontos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TRUCO!</td>
+                        <td>Aumenta o valor da rodada para 3 pontos</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>SEIS!</td>
+                        <td>Resposta ao Truco, aumenta para 6 pontos</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>NOVE!</td>
+                        <td>Resposta ao Retruco, aumenta para 9 pontos</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>Mão de Onze</td>
+                        <td>Quando um time está com 11 pontos</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Mão de Ferro</td>
+                        <td>Quando ambos os times estão com 11 pontos</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        
+        <section id="variantes" aria-labelledby="variantes-heading">
+            <h2 id="variantes-heading">Variantes do Truco</h2>
+            <p>O Truco possui várias versões regionais no Brasil, cada uma com suas particularidades:</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Truco Mineiro</h3>
+                    <p>Jogado com um baralho de 40 cartas (sem 8, 9, 10 e curingas), o objetivo é marcar 12 pontos primeiro. As cartas mais fortes são as manilhas fixas (4♥, 7♦, A♠, 7♥), seguidas por 3, 2, Ás, K, J, Q, 7, 6, 5 e 4.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Truco Paulista</h3>
+                    <p>Jogado com um baralho de 40 cartas (sem 8, 9, 10 e curingas), o objetivo é fazer 12 pontos primeiro. Diferente do Mineiro, as manilhas são variáveis, exemplo: se a carta virada for um 5, as manilhas serão a proxima carta, no caso o 6.</p>
+                </div>
+        </section>
+        
+        <section id="cartas" aria-labelledby="cartas-heading">
+            <h2 id="cartas-heading">Hierarquia das Cartas</h2>
+            <p>No Truco Paulista (a versão mais comum), a ordem de força das cartas é a seguinte (da mais forte para a mais fraca):</p>
+            <div class="card">
+                    <h3 class="card-title">Ordem das forças</h3>
+                    
+                        <li>3 </li>
+                        <li>2 </li>
+                        <li>Ás (A)</li>
+                        <li>Reis (K)</li>
+                        <li>Valete (J)</li>
+                        <li>Dama (Q)</li>
+                        <li>7</li>
+                        <li>6</li>
+                        <li>5</li>
+                        <li>4</li>
+                 
+                </div>
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Manilhas</h3>
+                    <ol>
+                        <li>Paus (Zap)</li>
+                        <li>Copas</li>
+                        <li>Espadas</li>
+                        <li>Ouros</li>
+                    </ol>
+                </div>
+            </div>
+            
+        <section id="dicas" aria-labelledby="dicas-heading">
+            <h2 id="dicas-heading">Dicas para Jogar</h2>
+            <p>O Truco é um jogo que mistura sorte com habilidade e psicologia. Aqui estão algumas estratégias para melhorar seu jogo:</p>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3 class="card-title">Aprenda a Blefar</h3>
+                    <p>No Truco, blefar é essencial. Mesmo com cartas ruins, você pode ganhar rodadas fazendo o adversário acreditar que tem cartas fortes. Mas cuidado para não exagerar!</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Observe os Adversários</h3>
+                    <p>Preste atenção nos padrões de jogo dos oponentes. Alguns jogadores têm "tiques" que revelam quando estão blefando ou com boas cartas.</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Memorize as Cartas</h3>
+                    <p>Lembre-se das cartas que já saíram para calcular as probabilidades das que ainda estão no monte ou nas mãos dos adversários.</p>
+                </div>
+            </div>
+            
+    <script>
+        // Funções para acessibilidade
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configuração do tamanho da fonte
+            const root = document.documentElement;
+            const savedFontSize = localStorage.getItem('fontSize');
+            if (savedFontSize) {
+                root.style.setProperty('--base-font-size', savedFontSize);
+                document.body.style.fontSize = savedFontSize;
+            }
+            
+            // Configuração do tema
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+            }
+            
+            // Event listeners para os botões
+            document.getElementById('increaseFont').addEventListener('click', increaseFont);
+            document.getElementById('decreaseFont').addEventListener('click', decreaseFont);
+            document.getElementById('toggleTheme').addEventListener('click', toggleTheme);
+            
+            // Foco visível para elementos
+            document.addEventListener('keyup', function(e) {
+                if (e.key === 'Tab') {
+                    const focused = document.activeElement;
+                    focused.style.outline = '3px solid var(--destaque-color)';
+                    focused.style.outlineOffset = '2px';
+                }
+            });
+            
+            // Atualiza o ícone do tema
+            updateThemeIcon();
+        });
+        
+        function increaseFont() {
+            const root = document.documentElement;
+            const currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+            const newSize = currentSize + 2;
+            root.style.setProperty('--base-font-size', newSize + 'px');
+            document.body.style.fontSize = newSize + 'px';
+            localStorage.setItem('fontSize', newSize + 'px');
+        }
+        
+        function decreaseFont() {
+            const root = document.documentElement;
+            const currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+            if (currentSize > 12) {
+                const newSize = currentSize - 2;
+                root.style.setProperty('--base-font-size', newSize + 'px');
+                document.body.style.fontSize = newSize + 'px';
+                localStorage.setItem('fontSize', newSize + 'px');
+            }
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon();
+        }
+        
+        function updateThemeIcon() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const themeBtn = document.getElementById('toggleTheme');
+            themeBtn.textContent = currentTheme === 'dark' ? '☀' : '🌙';
+        }
+        
+        // Adiciona aria-current para a navegação
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.removeAttribute('aria-current'));
+                this.setAttribute('aria-current', 'page');
+            });
+        });
+        
+        // Scroll suave para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
